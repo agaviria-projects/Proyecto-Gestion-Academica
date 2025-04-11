@@ -1,10 +1,7 @@
 package gestor.gestor_academico.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Estudiante {
@@ -15,8 +12,12 @@ public class Estudiante {
     private String apellido;
     private String email;
 
-    //Getter y Setters
+    //Relación con Curso
+    @ManyToOne
+    @JoinColumn(name ="curso_id") //nombre de la columna FK en la tabla estudiante
+    private Curso curso;
 
+    //Getter y Setters
 
     public Long getId() {
         return id;
@@ -34,6 +35,10 @@ public class Estudiante {
         return email;
     }
 
+    public Curso getCurso() {
+        return curso;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -48,5 +53,9 @@ public class Estudiante {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
 }

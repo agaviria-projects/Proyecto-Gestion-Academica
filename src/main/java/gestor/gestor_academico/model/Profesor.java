@@ -1,9 +1,11 @@
 package gestor.gestor_academico.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.persistence.OneToMany;
+import java.util.List;
+
+
+import java.awt.*;
 
 @Entity
 public class Profesor {
@@ -13,6 +15,10 @@ public class Profesor {
     private long id;
     private String nombre;
     private String especialidad;
+
+    //Relacion con los cursos que dicta el profesor
+    @OneToMany(mappedBy = "profesor", cascade= CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Curso> cursos;
 
     //Getter y Setters
 
@@ -28,6 +34,10 @@ public class Profesor {
         return especialidad;
     }
 
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -38,5 +48,9 @@ public class Profesor {
 
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
     }
 }

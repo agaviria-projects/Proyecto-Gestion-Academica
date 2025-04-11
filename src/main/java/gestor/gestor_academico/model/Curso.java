@@ -1,10 +1,10 @@
 package gestor.gestor_academico.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.persistence.OneToMany;
+
+import java.util.List;
 
 @Entity
 public class Curso {
@@ -13,6 +13,10 @@ public class Curso {
     private Long id;
     private String nombre;
     private String descripcion;
+
+    //Relación con Estudiante
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Estudiante> estudiantes;
 
     //Getter y Setters
 
@@ -28,6 +32,10 @@ public class Curso {
         return descripcion;
     }
 
+    public List<Estudiante> getEstudiantes() {
+        return estudiantes;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -38,5 +46,9 @@ public class Curso {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public void setEstudiantes(List<Estudiante> estudiantes) {
+        this.estudiantes = estudiantes;
     }
 }
