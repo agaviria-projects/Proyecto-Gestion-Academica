@@ -14,7 +14,7 @@ public class Estudiante {
 
     //Relación con Curso
     @ManyToOne
-    @JoinColumn(name ="curso_id") //nombre de la columna FK en la tabla estudiante
+    @JoinColumn(name ="curso_id", referencedColumnName = "id") //nombre de la columna FK en la tabla estudiante
     private Curso curso;
 
     //Getter y Setters
