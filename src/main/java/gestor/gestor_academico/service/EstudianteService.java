@@ -1,6 +1,6 @@
 package gestor.gestor_academico.service;
 
-import gestor.gestor_academico.model.Estudiante; // Asegúrate de importar la clase Estudiante
+import gestor.gestor_academico.model.Estudiante; // importar la clase Estudiante
 import gestor.gestor_academico.repository.EstudianteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
