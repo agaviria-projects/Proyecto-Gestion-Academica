@@ -12,7 +12,7 @@ Este proyecto es parte de mi proyecto integrador, donde se desarrolla una **apli
 
 La aplicación permite gestionar estudiantes, profesores y cursos. Se pueden realizar operaciones como **crear**, **consultar**, **actualizar** y **eliminar** estudiantes, profesores y cursos mediante una API RESTful. La arquitectura sigue el patrón de capas: **Modelo**, **Repositorio**, **Servicio** y **Controlador**.
 
-###. Estructura del Proyecto (Capas)
+## Estructura del Proyecto (Capas)
 Explicación de las capas: model, repository, service, controller.
 
 Los modelos:
