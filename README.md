@@ -14,6 +14,7 @@ La aplicación permite gestionar estudiantes, profesores y cursos. Se pueden rea
 
 ###. Estructura del Proyecto (Capas)
 Explicación de las capas: model, repository, service, controller.
+
 Los modelos:
 También llamados entidades, son clases que representan las tablas de la base de datos.
 Cada clase es una table, cada atributo (campo) es una columna de esa table y cada objeto creado a partir de esa clase sería una fila (registro) en la tabla.
