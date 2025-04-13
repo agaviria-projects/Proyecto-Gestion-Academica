@@ -20,11 +20,11 @@ También llamados entidades, son clases que representan las tablas de la base de
 Cada clase es una table, cada atributo (campo) es una columna de esa table y cada objeto creado a partir de esa clase sería una fila (registro) en la tabla.
 
 Los Repositorios:
-En Spring Boot, los repositorios son interfaces que se encargan de comunicar tu aplicación con la base de datos. Se basan en Spring Data JPA y te permiten hacer operaciones CRUD sin necesidad de escribir SQL.
+En Spring Boot, los repositorios son interfaces que se encargan de comunicar la aplicación con la base de datos. Se basan en Spring Data JPA y te permiten hacer operaciones CRUD sin necesidad de escribir SQL.
 
 Los Servicios:
 Los servicios son una capa intermedia entre los controladores y los repositorios.
-Sirven para manejar la lógica de negocio de tu aplicación.
+Sirven para manejar la lógica de negocio de la aplicación.
 Es todo lo que la aplicación debe hacer más allá de simplemente guardar o traer datos.
 Por ejemplo:
 Validaciones.
@@ -32,7 +32,7 @@ Cálculos.
 Reglas específicas del proyecto.
 
 Los controladores:
-Un controlador (o controller) es como el puente entre el usuario y tu aplicación.
+Un controlador (o controller) es como el puente entre el usuario y la aplicación.
 ejemplo
 El usuario quiere hacer algo (por ejemplo, ver todos los estudiantes).
 Ese pedido llega como una URL o petición HTTP (por ejemplo, GET /estudiantes).
