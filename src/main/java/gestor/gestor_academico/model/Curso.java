@@ -1,6 +1,5 @@
 package gestor.gestor_academico.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.List;
@@ -16,12 +15,17 @@ public class Curso {
 
     // Relación con Profesor
     @ManyToOne
-    @JoinColumn(name = "profesor_id")
+    @JoinColumn(name = "profesor_id",referencedColumnName = "id")
     private Profesor profesor;
 
     //Relación con Estudiante
-    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "curso",fetch = FetchType.LAZY)
     private List<Estudiante> estudiantes;
+
+    //Constructor vacio
+    public Curso(){
+
+    }
 
     //Getter y Setters
 

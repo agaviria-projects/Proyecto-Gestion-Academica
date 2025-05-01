@@ -8,6 +8,7 @@ public class Estudiante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String cedula;
     private String nombre;
     private String apellido;
     private String email;
@@ -17,10 +18,19 @@ public class Estudiante {
     @JoinColumn(name ="curso_id", referencedColumnName = "id") //nombre de la columna FK en la tabla estudiante
     private Curso curso;
 
+    //Constructor vacio
+    public Estudiante(){
+
+    }
+
     //Getter y Setters
 
     public Long getId() {
         return id;
+    }
+
+    public String getCedula() {
+        return cedula;
     }
 
     public String getNombre() {
@@ -41,6 +51,10 @@ public class Estudiante {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
     public void setNombre(String nombre) {

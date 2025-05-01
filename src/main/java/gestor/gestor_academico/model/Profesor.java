@@ -11,18 +11,22 @@ import java.awt.*;
 public class Profesor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private long id;
+
     private String nombre;
     private String especialidad;
+    private String email;
 
     //Relacion con los cursos que dicta el profesor
-    @OneToMany(mappedBy = "profesor", cascade= CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "profesor", fetch = FetchType.LAZY)
     private List<Curso> cursos;
 
-    //Getter y Setters
+    //Constructor vacio
+    public Profesor(){
 
-    public long getId() {
+    }
+    //Getter y Setters
+    public Long getId() {
         return id;
     }
 
@@ -34,23 +38,20 @@ public class Profesor {
         return especialidad;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public List<Curso> getCursos() {
         return cursos;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
-    }
-
-    public void setCursos(List<Curso> cursos) {
-        this.cursos = cursos;
-    }
 }
+
