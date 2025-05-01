@@ -11,11 +11,11 @@ public class Matricula {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="estudiante_id")
+    @JoinColumn(name="estudiante_id", referencedColumnName = "id")
     private Estudiante estudiante;
 
     @ManyToOne
-    @JoinColumn(name="curso_id")
+    @JoinColumn(name="curso_id", referencedColumnName = "id")
     private Curso curso;
 
     private LocalDate fechaMatricula;
