@@ -30,6 +30,10 @@ public class CursoController {
     public Curso buscar(@PathVariable Long id){
         return cursoService.buscarPorId(id);
     }
+    @PutMapping("/{id}")
+    public Curso actualizarCurso(@PathVariable Long id, @RequestBody Curso curso){
+        return cursoService.actualizarCurso(id,curso);
+    }
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Long id){
         cursoService.eliminarCurso(id);

@@ -16,12 +16,18 @@ public class EstudianteController {
 
     @GetMapping
     public List<Estudiante>Listar(){
+
         return estudianteService.listarEstudiantes();
     }
 
     @PostMapping
     public Estudiante guardar(@RequestBody Estudiante estudiante){
         return estudianteService.guardarEstudiante(estudiante);
+    }
+
+    @PutMapping("/{id}")
+    public Estudiante actualizarEstudiante(@PathVariable Long id, @RequestBody Estudiante estudiante){
+        return estudianteService.actualizarEstudiante(id, estudiante);
     }
 
     @GetMapping("/{id}")

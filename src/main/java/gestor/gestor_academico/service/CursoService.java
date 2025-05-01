@@ -24,6 +24,14 @@ public class CursoService {
         return cursoRepository.findById(id).orElse(null);
     }
 
+    public Curso actualizarCurso(Long id, Curso curso) {
+        if (cursoRepository.existsById(id)) {
+            curso.setId(id);
+            return cursoRepository.save(curso);
+        }
+        return null;
+    }
+
     public void eliminarCurso(Long id){
         cursoRepository.deleteById(id);
     }

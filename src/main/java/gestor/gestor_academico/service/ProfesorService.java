@@ -26,6 +26,13 @@ public class ProfesorService {
     public Profesor buscarPorId(Long id){
         return profesorRepository.findById(id).orElse(null);
     }
+    public Profesor actualizarProfesor(Long id, Profesor profesor) {
+        if (profesorRepository.existsById(id)) {
+            profesor.setId(id);
+            return profesorRepository.save(profesor);
+        }
+        return null;
+    }
 
     public void eliminarProfesor(Long id){
         profesorRepository.deleteById(id);

@@ -24,6 +24,12 @@ public class ProfesorController {
     public Profesor guardar(@RequestBody Profesor profesor){
         return profesorService.guardarProfesor(profesor);
     }
+
+    @PutMapping("/{id}")
+    public Profesor guardar(@PathVariable Long id,@RequestBody Profesor profesor){
+        return profesorService.actualizarProfesor(id,profesor);
+    }
+
     @GetMapping("/{id}")
     public Profesor buscar(@PathVariable Long id){
         return profesorService.buscarPorId(id);
@@ -32,6 +38,4 @@ public class ProfesorController {
     public void eliminar(@PathVariable Long id){
         profesorService.eliminarProfesor(id);
     }
-
-
 }

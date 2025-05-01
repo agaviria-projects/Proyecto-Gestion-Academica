@@ -24,6 +24,13 @@ public class EstudianteService {
     public Estudiante buscarPorId(Long id){
         return estudianteRepository.findById(id).orElse(null);
     }
+    public Estudiante actualizarEstudiante(Long id, Estudiante estudiante) {
+        if (estudianteRepository.existsById(id)) {
+            estudiante.setId(id);
+            return estudianteRepository.save(estudiante);
+        }
+        return null;
+    }
 
     public void eliminarEstudiante(Long id){
         estudianteRepository.deleteById(id);
