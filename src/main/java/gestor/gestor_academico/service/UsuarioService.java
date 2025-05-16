@@ -12,8 +12,8 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public Optional<Usuario> login(String nombreUsuario, String contrasena, String rol) {
-        return usuarioRepository.findByNombreUsuarioAndContrasenaAndRol(nombreUsuario, contrasena, rol);
+    public Optional<Usuario> login(String nombreUsuario, String contrasena) {
+        return usuarioRepository.findByNombreUsuarioAndContrasena(nombreUsuario, contrasena);
     }
 }
 

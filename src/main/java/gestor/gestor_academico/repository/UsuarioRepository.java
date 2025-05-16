@@ -9,5 +9,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     // Busca un usuario que coincida exactamente con nombreUsuario, contraseña y rol.
     // Esta consulta se usa para validar el login del sistema.
     // Devuelve un Optional<Usuario> que estará presente si las credenciales son correctas.
-    Optional<Usuario> findByNombreUsuarioAndContrasenaAndRol(String nombreUsuario, String contrasena, String rol);
+    Optional<Usuario> findByNombreUsuarioAndContrasena(String nombreUsuario, String contrasena);
 }
