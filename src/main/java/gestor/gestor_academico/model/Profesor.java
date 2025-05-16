@@ -5,8 +5,6 @@ import jakarta.persistence.OneToMany;
 import java.util.List;
 
 
-import java.awt.*;
-
 @Entity
 public class Profesor {
     @Id
@@ -53,5 +51,18 @@ public class Profesor {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
+    }
+
 }
 

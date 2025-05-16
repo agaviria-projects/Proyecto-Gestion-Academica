@@ -18,10 +18,6 @@ public class Curso {
     @JoinColumn(name = "profesor_id",referencedColumnName = "id")
     private Profesor profesor;
 
-    //Relación con Estudiante
-    @OneToMany(mappedBy = "curso",fetch = FetchType.LAZY)
-    private List<Estudiante> estudiantes;
-
     //Constructor vacio
     public Curso(){
 
@@ -43,10 +39,6 @@ public class Curso {
 
     public Profesor getProfesor(){ return profesor;}
 
-    public List<Estudiante> getEstudiantes() {
-        return estudiantes;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -63,7 +55,4 @@ public class Curso {
         this.profesor = profesor;
     }
 
-    public void setEstudiantes(List<Estudiante> estudiantes) {
-        this.estudiantes = estudiantes;
-    }
 }

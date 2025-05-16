@@ -2,7 +2,6 @@ package gestor.gestor_academico.controller;
 
 import gestor.gestor_academico.model.Estudiante;
 import gestor.gestor_academico.service.EstudianteService;
-import gestor.gestor_academico.service.CursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,30 +14,21 @@ public class EstudianteController {
     @Autowired
     private EstudianteService estudianteService;
 
-    @Autowired
-    private CursoService cursoService;
-
     // Listar todos los estudiantes
     @GetMapping
-    public List<Estudiante> Listar() {
+    public List<Estudiante> listar() {
         return estudianteService.listarEstudiantes();
     }
 
     // Guardar nuevo estudiante
     @PostMapping
     public Estudiante guardar(@RequestBody Estudiante estudiante) {
-        if (estudiante.getCurso() != null && estudiante.getCurso().getId() != null) {
-            estudiante.setCurso(cursoService.buscarPorId(estudiante.getCurso().getId()));
-        }
         return estudianteService.guardarEstudiante(estudiante);
     }
 
     // Actualizar estudiante por ID
     @PutMapping("/{id}")
     public Estudiante actualizarEstudiante(@PathVariable Long id, @RequestBody Estudiante estudiante) {
-        if (estudiante.getCurso() != null && estudiante.getCurso().getId() != null) {
-            estudiante.setCurso(cursoService.buscarPorId(estudiante.getCurso().getId()));
-        }
         return estudianteService.actualizarEstudiante(id, estudiante);
     }
 
@@ -54,3 +44,4 @@ public class EstudianteController {
         estudianteService.eliminarEstudiante(id);
     }
 }
+

@@ -3,6 +3,8 @@ package gestor.gestor_academico.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Estudiante {
     @Id
@@ -21,10 +23,18 @@ public class Estudiante {
     @Column(name = "email")
     private String email;
 
-    //Relación con Curso
-    @ManyToOne
-    @JoinColumn(name ="curso_id", referencedColumnName = "id") //nombre de la columna FK en la tabla estudiante
-    private Curso curso;
+    @Column(name = "cantidadFaltas")
+    private Integer cantidadFaltas =0;
+
+
+    // Relación inversa opcional con Nota
+    @OneToMany(mappedBy = "estudiante", fetch = FetchType.LAZY)
+    private List<Nota> notas;
+
+    // Relación inversa opcional con Matricula
+    @OneToMany(mappedBy = "estudiante", fetch = FetchType.LAZY)
+    private List<Matricula> matriculas;
+
 
     //Constructor vacio
     public Estudiante(){
@@ -53,8 +63,16 @@ public class Estudiante {
         return email;
     }
 
-    public Curso getCurso() {
-        return curso;
+    public List<Nota> getNotas() {
+        return notas;
+    }
+
+    public Integer getCantidadFaltas(){
+        return cantidadFaltas;
+    }
+
+    public List<Matricula> getMatriculas() {
+        return matriculas;
     }
 
     public void setId(Long id) {
@@ -77,7 +95,16 @@ public class Estudiante {
         this.email = email;
     }
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
+    public void setNotas(List<Nota> notas) {
+        this.notas = notas;
     }
+
+    public void setCantidadFaltas(Integer cantidadFaltas) {
+        this.cantidadFaltas = cantidadFaltas;
+    }
+
+    public void setMatriculas(List<Matricula> matriculas) {
+        this.matriculas = matriculas;
+    }
+
 }
