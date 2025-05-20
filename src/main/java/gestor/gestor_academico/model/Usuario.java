@@ -1,6 +1,5 @@
 package gestor.gestor_academico.model;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,28 +10,24 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
+
     private String nombreUsuario;
     private String contrasena;
-    private String rol; //admin, estudiante, profesor
+    private String correo;     // ← Agregado
+    private String rol;
 
-    public Usuario(){
-
+    public Usuario() {
     }
-    // Constructor adicional con argumentos
-    // Se utiliza para crear objetos Usuario rápidamente desde código Java,
-    // por ejemplo al insertar datos de prueba sin usar Postman o React.
-    // No es obligatorio para el funcionamiento del sistema, pero es útil en pruebas.
 
-    public Usuario(String nombreUsuario,String contrasena, String rol){
-        this.nombreUsuario=nombreUsuario;
-        this.contrasena=contrasena;
-        this.rol=rol;
+    public Usuario(String nombreUsuario, String contrasena, String correo, String rol) {
+        this.nombreUsuario = nombreUsuario;
+        this.contrasena = contrasena;
+        this.correo = correo;
+        this.rol = rol;
     }
-    // Getters y setters
 
-
+    // Getters
     public Long getId() {
         return id;
     }
@@ -45,10 +40,15 @@ public class Usuario {
         return contrasena;
     }
 
+    public String getCorreo() {
+        return correo;
+    }
+
     public String getRol() {
         return rol;
     }
 
+    // Setters
     public void setId(Long id) {
         this.id = id;
     }
@@ -59,6 +59,10 @@ public class Usuario {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public void setRol(String rol) {

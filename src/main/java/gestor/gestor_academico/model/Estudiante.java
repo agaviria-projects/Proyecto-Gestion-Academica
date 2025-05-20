@@ -1,6 +1,7 @@
 package gestor.gestor_academico.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -29,10 +30,12 @@ public class Estudiante {
 
     // Relación inversa opcional con Nota
     @OneToMany(mappedBy = "estudiante", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Nota> notas;
 
     // Relación inversa opcional con Matricula
     @OneToMany(mappedBy = "estudiante", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Matricula> matriculas;
 
 
