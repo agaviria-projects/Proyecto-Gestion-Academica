@@ -31,6 +31,9 @@ public class EstudianteService {
         }
         return null;
     }
+    public Long contarEstudiantes(){
+        return estudianteRepository.count();
+    }
 
     public void eliminarEstudiante(Long id){
         estudianteRepository.deleteById(id);

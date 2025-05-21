@@ -1,6 +1,7 @@
 package gestor.gestor_academico.controller;
 
 import gestor.gestor_academico.model.Estudiante;
+import gestor.gestor_academico.repository.EstudianteRepository;
 import gestor.gestor_academico.service.EstudianteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -43,5 +44,11 @@ public class EstudianteController {
     public void eliminar(@PathVariable Long id) {
         estudianteService.eliminarEstudiante(id);
     }
+
+    @GetMapping("/total")
+    public Long contarEstudiantes() {
+        return estudianteService.contarEstudiantes();
+    }
+
 }
 
