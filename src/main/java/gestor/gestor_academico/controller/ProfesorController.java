@@ -43,4 +43,11 @@ public class ProfesorController {
     public void eliminar(@PathVariable Long id) {
         profesorService.eliminarProfesor(id);
     }
+
+    @GetMapping("/total")
+    public Long contarProfesores() {
+        return profesorService.contarProfesores();
+    }
+
+
 }

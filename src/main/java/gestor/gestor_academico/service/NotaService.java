@@ -29,6 +29,11 @@ public class NotaService {
         return notaRepository.save(nota);
     }
 
+    public Long contarNotas(){
+        return notaRepository.count();
+    }
+
+
     //Eliminar una nota por Id
     public void eliminarNota(Long id){
         notaRepository.deleteById(id);

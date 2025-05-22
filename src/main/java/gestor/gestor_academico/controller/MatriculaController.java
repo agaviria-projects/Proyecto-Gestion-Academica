@@ -63,5 +63,10 @@ public class MatriculaController {
     public void eliminar(@PathVariable Long id) {
         matriculaService.eliminarMatricula(id);
     }
+    @GetMapping("/total")
+    public Long contarMatriculas() {
+        return matriculaService.contarMatriculas();
+    }
+
 }
 

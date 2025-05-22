@@ -32,6 +32,11 @@ public class CursoService {
         return null;
     }
 
+    public Long contarCursos(){
+        return cursoRepository.count();
+    }
+
+
     public void eliminarCurso(Long id){
         cursoRepository.deleteById(id);
     }

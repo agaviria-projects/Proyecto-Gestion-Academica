@@ -65,4 +65,10 @@ public class  NotaController {
     public void eliminar(@PathVariable Long id) {
         notaService.eliminarNota(id);
     }
+
+    @GetMapping("/total")
+    public Long contarNotas() {
+        return notaService.contarNotas();
+    }
+
 }

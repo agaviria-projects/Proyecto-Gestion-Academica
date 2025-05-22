@@ -57,4 +57,10 @@ public class UsuarioController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/total")
+    public Long contarUsuarios() {
+        return usuarioService.contarUsuarios();
+    }
+
 }

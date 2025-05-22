@@ -31,6 +31,11 @@ public class MatriculaService {
         }
         return null;
     }
+
+    public Long contarMatriculas(){
+        return matriculaRepository.count();
+    }
+
     public void eliminarMatricula(Long id){
         matriculaRepository.deleteById(id);
     }

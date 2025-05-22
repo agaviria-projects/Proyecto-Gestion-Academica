@@ -43,6 +43,9 @@ public class UsuarioService {
         }
         return false;
     }
+    public Long contarUsuarios(){
+        return usuarioRepository.count();
+    }
 
     public Optional<Usuario> login(String nombreUsuario, String contrasena) {
         return usuarioRepository.findByNombreUsuarioAndContrasena(nombreUsuario, contrasena);

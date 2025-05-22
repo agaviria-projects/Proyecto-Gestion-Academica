@@ -34,6 +34,11 @@ public class ProfesorService {
         return null;
     }
 
+    public Long contarProfesores(){
+        return profesorRepository.count();
+    }
+
+
     public void eliminarProfesor(Long id){
         profesorRepository.deleteById(id);
     }
