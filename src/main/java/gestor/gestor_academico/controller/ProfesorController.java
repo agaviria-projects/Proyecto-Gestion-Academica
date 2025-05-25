@@ -1,11 +1,13 @@
 package gestor.gestor_academico.controller;
 
+import gestor.gestor_academico.dto.ProfesorDTO;
 import gestor.gestor_academico.model.Profesor;
 import gestor.gestor_academico.service.ProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/profesores")
@@ -15,10 +17,19 @@ public class ProfesorController {
     private ProfesorService profesorService;
 
     // Listar todos los profesores
-    @GetMapping
-    public List<Profesor> Listar() {
-        return profesorService.listarProfesores();
+    @GetMapping("/dto")
+    public List<ProfesorDTO> obtenerProfesoresDTO() {
+        List<Profesor> profesores = profesorService.listarProfesores();
+        return profesorService.listarProfesores().stream().map(p -> {
+            ProfesorDTO dto = new ProfesorDTO();
+            dto.setId(p.getId());
+            dto.setNombre(p.getNombre());
+            dto.setEspecialidad(p.getEspecialidad());
+            dto.setEmail(p.getEmail());
+            return dto;
+        }).collect(Collectors.toList());
     }
+
 
     // Guardar un nuevo profesor
     @PostMapping
