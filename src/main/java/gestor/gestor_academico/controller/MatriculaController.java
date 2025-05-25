@@ -1,5 +1,6 @@
 package gestor.gestor_academico.controller;
 
+import gestor.gestor_academico.dto.MatriculaDTO;
 import gestor.gestor_academico.model.Matricula;
 import gestor.gestor_academico.service.MatriculaService;
 import gestor.gestor_academico.service.CursoService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/matriculas")
@@ -23,11 +25,18 @@ public class MatriculaController {
     private EstudianteService estudianteService;
 
     // Listar todas las matrículas
-    @GetMapping
-    public List<Matricula> Listar() {
-        return matriculaService.listarMatriculas();
-    }
 
+    @GetMapping
+    public List<MatriculaDTO> listar() {
+        return matriculaService.listarMatriculas().stream()
+                .map(m -> new MatriculaDTO(
+                        m.getId(),
+                        m.getEstudiante().getNombre(),
+                        m.getEstudiante().getApellido(),
+                        m.getCurso().getNombre(),
+                        m.getFechaMatricula()))
+                .collect(Collectors.toList());
+    }
     // Buscar matrícula por ID
     @GetMapping("/{id}")
     public Matricula buscar(@PathVariable Long id) {

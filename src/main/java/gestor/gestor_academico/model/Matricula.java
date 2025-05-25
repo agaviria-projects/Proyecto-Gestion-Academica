@@ -10,11 +10,11 @@ public class Matricula {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="estudiante_id", referencedColumnName = "id")
     private Estudiante estudiante;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="curso_id", referencedColumnName = "id")
     private Curso curso;
 
