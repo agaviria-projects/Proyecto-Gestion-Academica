@@ -2,12 +2,16 @@ package gestor.gestor_academico.controller;
 
 import gestor.gestor_academico.dto.CursoDTO;
 import gestor.gestor_academico.model.Curso;
+import gestor.gestor_academico.repository.CursoRepository;
 import gestor.gestor_academico.service.CursoService;
 import gestor.gestor_academico.service.ProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/cursos")
@@ -18,6 +22,9 @@ public class CursoController {
 
     @Autowired
     private ProfesorService profesorService;
+
+    @Autowired
+    private CursoRepository cursoRepository;
 
     // Listar todos los cursos
     @GetMapping("/dto")
@@ -36,7 +43,19 @@ public class CursoController {
             return dto;
         }).toList();
     }
+    @GetMapping("/cantidad-por-profesor")
+    public List<Map<String, Object>> cursosPorProfesor() {
+        List<Object[]> resultados = cursoRepository.cantidadCursosPorProfesor();
+        List<Map<String, Object>> respuesta = new ArrayList<>();
 
+        for (Object[] fila : resultados) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("profesor", fila[0]);
+            map.put("cantidad", fila[1]);
+            respuesta.add(map);
+        }
+        return respuesta;
+    }
 
     // Guardar un nuevo curso
     @PostMapping
