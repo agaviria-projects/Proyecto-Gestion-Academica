@@ -14,7 +14,7 @@ public class Curso {
     private String descripcion;
 
     // Relación con Profesor
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "profesor_id",referencedColumnName = "id")
     private Profesor profesor;
 
