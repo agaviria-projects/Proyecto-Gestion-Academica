@@ -16,6 +16,7 @@ public class Curso {
     // Relación con Profesor
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "profesor_id",referencedColumnName = "id")
+    @JsonIgnoreProperties("cursos")
     private Profesor profesor;
 
     //Constructor vacio
@@ -55,4 +56,16 @@ public class Curso {
         this.profesor = profesor;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Curso curso = (Curso) o;
+        return id != null && id.equals(curso.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 31; // puedes usar Objects.hash(id) si usas Java 7+
+    }
 }

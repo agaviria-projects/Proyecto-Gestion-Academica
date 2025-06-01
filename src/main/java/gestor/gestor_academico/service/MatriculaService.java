@@ -24,6 +24,11 @@ public class MatriculaService {
         return matriculaRepository.save(matricula);
     }
 
+    public List<Matricula> listarPorEstudiante(Long idEstudiante) {
+        return matriculaRepository.findByEstudianteId(idEstudiante);
+    }
+
+
     public Matricula actualizarMatricula(Long id, Matricula matricula){
         if(matriculaRepository.existsById(id)){
             matricula.setId(id);

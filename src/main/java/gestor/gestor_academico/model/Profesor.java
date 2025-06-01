@@ -1,5 +1,6 @@
 package gestor.gestor_academico.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.persistence.OneToMany;
 import java.util.List;
@@ -17,6 +18,7 @@ public class Profesor {
 
     //Relacion con los cursos que dicta el profesor
     @OneToMany(mappedBy = "profesor", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Curso> cursos;
 
     //Constructor vacio

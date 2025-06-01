@@ -1,6 +1,7 @@
 package gestor.gestor_academico.controller;
 
 import gestor.gestor_academico.dto.MatriculaDTO;
+import gestor.gestor_academico.model.Curso;
 import gestor.gestor_academico.model.Matricula;
 import gestor.gestor_academico.service.MatriculaService;
 import gestor.gestor_academico.service.CursoService;
@@ -43,6 +44,11 @@ public class MatriculaController {
         return matriculaService.buscarPorId(id);
     }
 
+    @GetMapping("/estudiante/{id}")
+    public List<Matricula> listarPorEstudiante(@PathVariable Long id) {
+        return matriculaService.listarPorEstudiante(id);
+    }
+
     // Guardar una nueva matrícula
     @PostMapping
     public Matricula guardar(@RequestBody Matricula matricula) {
@@ -75,6 +81,15 @@ public class MatriculaController {
     @GetMapping("/total")
     public Long contarMatriculas() {
         return matriculaService.contarMatriculas();
+    }
+
+    @GetMapping("/estudiante/{id}/cursos")
+    public List<Curso> cursosDeEstudiante(@PathVariable Long id) {
+        return matriculaService.listarPorEstudiante(id)
+                .stream()
+                .map(Matricula::getCurso)
+                .distinct() // evita cursos duplicados si está matriculado varias veces al mismo
+                .collect(Collectors.toList());
     }
 
 }

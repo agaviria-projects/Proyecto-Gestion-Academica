@@ -12,4 +12,7 @@ public interface MatriculaRepository extends JpaRepository<Matricula, Long> {
     @Query("SELECT new gestor.gestor_academico.dto.EstudiantesPorCursoDTO(m.curso.nombre, COUNT(m.id)) " +
             "FROM Matricula m GROUP BY m.curso.nombre")
     List<EstudiantesPorCursoDTO> cantidadEstudiantesPorCurso();
+
+    List<Matricula> findByEstudianteId(Long idEstudiante);
+
 }
