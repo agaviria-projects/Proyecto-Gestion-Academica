@@ -40,6 +40,13 @@ public class  NotaController {
     @PostMapping
     public Nota guardar(@RequestBody NotaInputDTO dto) {
         Nota nota = new Nota();
+
+        // Si viene un ID, asumimos que es edición
+        if (dto.getId() != null && notaService.existePorId(dto.getId())) {
+            nota = notaService.obtenerNotaPorId(dto.getId()).orElse(new Nota());
+            nota.setId(dto.getId()); // Asegura que es edición
+        }
+
         nota.setNota(dto.getNota());
         nota.setFechaNota(dto.getFechaNota());
 
@@ -53,7 +60,6 @@ public class  NotaController {
 
         return notaService.guardarNota(nota);
     }
-
 
     // Buscar nota por ID
     @GetMapping("/{id}")

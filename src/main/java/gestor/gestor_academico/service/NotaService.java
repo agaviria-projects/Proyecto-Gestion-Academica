@@ -33,6 +33,9 @@ public class NotaService {
         return notaRepository.count();
     }
 
+    public boolean existePorId(Long id) {
+        return notaRepository.existsById(id);
+    }
 
     //Eliminar una nota por Id
     public void eliminarNota(Long id){
