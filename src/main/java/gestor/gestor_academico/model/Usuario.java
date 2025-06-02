@@ -1,9 +1,6 @@
 package gestor.gestor_academico.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Usuario {
@@ -11,6 +8,11 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "profesor_id")
+    private Profesor profesor;
+
 
     private String nombreUsuario;
     private String contrasena;
@@ -48,6 +50,10 @@ public class Usuario {
         return rol;
     }
 
+    public Profesor getProfesor() {
+        return profesor;
+    }
+
     // Setters
     public void setId(Long id) {
         this.id = id;
@@ -67,5 +73,9 @@ public class Usuario {
 
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    public void setProfesor(Profesor profesor) {
+        this.profesor = profesor;
     }
 }

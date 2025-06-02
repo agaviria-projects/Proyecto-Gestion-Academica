@@ -27,22 +27,7 @@ public class CursoController {
     private CursoRepository cursoRepository;
 
     // Listar todos los cursos
-    @GetMapping("/dto")
-    public List<CursoDTO> obtenerCursosConProfesor() {
-        List<Curso> cursos = cursoService.listarCursos();
-        return cursos.stream().map(curso -> {
-            CursoDTO dto = new CursoDTO();
-            dto.setId(curso.getId());
-            dto.setNombre(curso.getNombre());
-            dto.setDescripcion(curso.getDescripcion());
-            dto.setNombreProfesor(
-                    (curso.getProfesor() != null && curso.getProfesor().getNombre() != null)
-                            ? curso.getProfesor().getNombre()
-                            : "Sin asignar"
-            );
-            return dto;
-        }).toList();
-    }
+
     @GetMapping("/cantidad-por-profesor")
     public List<Map<String, Object>> cursosPorProfesor() {
         List<Object[]> resultados = cursoRepository.cantidadCursosPorProfesor();
@@ -55,6 +40,31 @@ public class CursoController {
             respuesta.add(map);
         }
         return respuesta;
+    }
+    // Obtener lista de cursos con nombre del profesor (y filtrado por profesorId si se desea)
+    @GetMapping("/dto")
+    public List<CursoDTO> obtenerCursosDTO(@RequestParam(required = false) Long profesorId) {
+        List<Curso> cursos = cursoRepository.findAll();
+
+        if (profesorId != null) {
+            cursos = cursos.stream()
+                    .filter(c -> c.getProfesor() != null && c.getProfesor().getId().equals(profesorId))
+                    .toList();
+        }
+
+        return cursos.stream().map(c -> {
+            CursoDTO dto = new CursoDTO();
+            dto.setId(c.getId());
+            dto.setNombre(c.getNombre());
+            dto.setDescripcion(c.getDescripcion());
+
+            if (c.getProfesor() != null) {
+                dto.setNombreProfesor(c.getProfesor().getNombre());
+                dto.setProfesorId(c.getProfesor().getId());
+            }
+
+            return dto;
+        }).toList();
     }
 
     // Guardar un nuevo curso

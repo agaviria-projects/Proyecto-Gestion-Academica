@@ -50,4 +50,9 @@ public class UsuarioService {
     public Optional<Usuario> login(String nombreUsuario, String contrasena) {
         return usuarioRepository.findByNombreUsuarioAndContrasena(nombreUsuario, contrasena);
     }
+
+    public Usuario buscarPorNombreUsuario(String nombreUsuario) {
+        return usuarioRepository.findByNombreUsuario(nombreUsuario);
+    }
+
 }

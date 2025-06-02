@@ -96,9 +96,25 @@ public class  NotaController {
     public Long contarNotas() {
         return notaService.contarNotas();
     }
+
     @GetMapping("/dto")
-    public List<NotaDTO> obtenerNotasConNombres() {
+    public List<NotaDTO> obtenerNotasConNombres(
+            @RequestParam(required = false) Long profesorId,
+            @RequestParam(required = false) Long estudianteId
+    ) {
         List<Nota> notas = notaRepository.findAll();
+
+        if (profesorId != null) {
+            notas = notas.stream()
+                    .filter(n -> n.getCurso().getProfesor().getId().equals(profesorId))
+                    .collect(Collectors.toList());
+        }
+
+        if (estudianteId != null) {
+            notas = notas.stream()
+                    .filter(n -> n.getEstudiante().getId().equals(estudianteId))
+                    .collect(Collectors.toList());
+        }
 
         return notas.stream().map(n -> {
             NotaDTO dto = new NotaDTO();
@@ -112,5 +128,7 @@ public class  NotaController {
         }).collect(Collectors.toList());
     }
 
-
 }
+
+
+

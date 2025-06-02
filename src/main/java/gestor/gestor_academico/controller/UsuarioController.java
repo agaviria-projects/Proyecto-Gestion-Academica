@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -16,15 +18,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Usuario usuario) {
-        Optional<Usuario> user = usuarioService.login(usuario.getNombreUsuario(), usuario.getContrasena());
-        if (user.isPresent()) {
-            return ResponseEntity.ok(user.get());
-        } else {
-            return ResponseEntity.status(401).body("Credenciales inválidas");
-        }
-    }
+
 
     @GetMapping
     public List<Usuario> obtenerTodosLosUsuarios() {
@@ -62,5 +56,29 @@ public class UsuarioController {
     public Long contarUsuarios() {
         return usuarioService.contarUsuarios();
     }
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Usuario usuario) {
+        Usuario encontrado = usuarioService.buscarPorNombreUsuario(usuario.getNombreUsuario());
+
+        if (encontrado != null && encontrado.getContrasena().equals(usuario.getContrasena())) {
+            // Construir respuesta personalizada
+            Map<String, Object> response = new HashMap<>();
+            response.put("id", encontrado.getId());
+            response.put("nombreUsuario", encontrado.getNombreUsuario());
+            response.put("rol", encontrado.getRol());
+            response.put("correo", encontrado.getCorreo());
+
+            // Si el usuario es profesor, incluir el id del profesor asociado
+            if ("PROFESOR".equalsIgnoreCase(encontrado.getRol()) && encontrado.getProfesor() != null) {
+                response.put("profesorId", encontrado.getProfesor().getId());
+            }
+
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(401).body("Credenciales inválidas");
+        }
+    }
+
+
 
 }
