@@ -60,5 +60,10 @@ public class ProfesorService {
                 .collect(Collectors.toList());
     }
 
+    public Profesor buscarPorCorreo(String correo) {
+        return profesorRepository.findByEmail(correo).orElse(null);
+    }
+
+
 }
 

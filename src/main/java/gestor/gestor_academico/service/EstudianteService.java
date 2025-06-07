@@ -38,4 +38,9 @@ public class EstudianteService {
     public void eliminarEstudiante(Long id){
         estudianteRepository.deleteById(id);
     }
+
+    public Estudiante buscarPorCorreo(String correo) {
+        return estudianteRepository.findByEmail(correo).orElse(null);
+    }
+
 }

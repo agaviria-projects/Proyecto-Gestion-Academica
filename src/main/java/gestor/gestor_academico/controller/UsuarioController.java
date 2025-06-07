@@ -1,7 +1,12 @@
+// ✅ UsuarioController.java corregido
 package gestor.gestor_academico.controller;
 
 import gestor.gestor_academico.model.Usuario;
+import gestor.gestor_academico.model.Profesor;
+import gestor.gestor_academico.model.Estudiante;
 import gestor.gestor_academico.service.UsuarioService;
+import gestor.gestor_academico.service.ProfesorService;
+import gestor.gestor_academico.service.EstudianteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +23,12 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private ProfesorService profesorService;
+
+    @Autowired
+    private EstudianteService estudianteService;
+
     @GetMapping
     public List<Usuario> obtenerTodosLosUsuarios() {
         return usuarioService.obtenerTodos();
@@ -32,6 +43,22 @@ public class UsuarioController {
 
     @PostMapping
     public Usuario crearUsuario(@RequestBody Usuario usuario) {
+        // Asociar estudiante si el rol es ESTUDIANTE
+        if ("ESTUDIANTE".equalsIgnoreCase(usuario.getRol()) && usuario.getCorreo() != null) {
+            Estudiante estudiante = estudianteService.buscarPorCorreo(usuario.getCorreo());
+            if (estudiante != null) {
+                usuario.setEstudiante(estudiante);
+            }
+        }
+
+        // Asociar profesor si el rol es PROFESOR
+        if ("PROFESOR".equalsIgnoreCase(usuario.getRol()) && usuario.getCorreo() != null) {
+            Profesor profesor = profesorService.buscarPorCorreo(usuario.getCorreo());
+            if (profesor != null) {
+                usuario.setProfesor(profesor);
+            }
+        }
+
         return usuarioService.guardar(usuario);
     }
 
@@ -65,13 +92,8 @@ public class UsuarioController {
             response.put("nombreUsuario", encontrado.getNombreUsuario());
             response.put("rol", encontrado.getRol());
             response.put("correo", encontrado.getCorreo());
-
-            // Siempre incluir ambos campos aunque sean null
-            response.put("profesorId",
-                    (encontrado.getProfesor() != null) ? encontrado.getProfesor().getId() : null);
-
-            response.put("estudianteId",
-                    (encontrado.getEstudiante() != null) ? encontrado.getEstudiante().getId() : null);
+            response.put("profesorId", (encontrado.getProfesor() != null) ? encontrado.getProfesor().getId() : null);
+            response.put("estudianteId", (encontrado.getEstudiante() != null) ? encontrado.getEstudiante().getId() : null);
 
             return ResponseEntity.ok(response);
         } else {
@@ -79,4 +101,3 @@ public class UsuarioController {
         }
     }
 }
-

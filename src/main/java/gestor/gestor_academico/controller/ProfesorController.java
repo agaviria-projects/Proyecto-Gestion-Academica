@@ -49,6 +49,9 @@ public class ProfesorController {
     public List<ProfesorDTO> listarProfesoresDTO() {
         return profesorService.obtenerTodosDTO();
     }
-
+    @GetMapping
+    public List<Profesor> obtenerTodos() {
+        return profesorService.listarProfesores();
+    }
 
 }
