@@ -13,10 +13,13 @@ public class Usuario {
     @JoinColumn(name = "profesor_id")
     private Profesor profesor;
 
+    @ManyToOne
+    @JoinColumn(name = "estudiante_id")
+    private Estudiante estudiante;
 
     private String nombreUsuario;
     private String contrasena;
-    private String correo;     // ← Agregado
+    private String correo;
     private String rol;
 
     public Usuario() {
@@ -54,6 +57,10 @@ public class Usuario {
         return profesor;
     }
 
+    public Estudiante getEstudiante() {
+        return estudiante;
+    }
+
     // Setters
     public void setId(Long id) {
         this.id = id;
@@ -77,5 +84,9 @@ public class Usuario {
 
     public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
+    }
+
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
     }
 }

@@ -16,21 +16,6 @@ public class ProfesorController {
     @Autowired
     private ProfesorService profesorService;
 
-    // Listar todos los profesores
-    @GetMapping("/dto")
-    public List<ProfesorDTO> obtenerProfesoresDTO() {
-        List<Profesor> profesores = profesorService.listarProfesores();
-        return profesorService.listarProfesores().stream().map(p -> {
-            ProfesorDTO dto = new ProfesorDTO();
-            dto.setId(p.getId());
-            dto.setNombre(p.getNombre());
-            dto.setEspecialidad(p.getEspecialidad());
-            dto.setEmail(p.getEmail());
-            return dto;
-        }).collect(Collectors.toList());
-    }
-
-
     // Guardar un nuevo profesor
     @PostMapping
     public Profesor guardar(@RequestBody Profesor profesor) {
@@ -58,6 +43,11 @@ public class ProfesorController {
     @GetMapping("/total")
     public Long contarProfesores() {
         return profesorService.contarProfesores();
+    }
+
+    @GetMapping("/dto")
+    public List<ProfesorDTO> listarProfesoresDTO() {
+        return profesorService.obtenerTodosDTO();
     }
 
 

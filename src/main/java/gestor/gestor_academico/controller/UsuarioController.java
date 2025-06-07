@@ -18,8 +18,6 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-
-
     @GetMapping
     public List<Usuario> obtenerTodosLosUsuarios() {
         return usuarioService.obtenerTodos();
@@ -56,29 +54,29 @@ public class UsuarioController {
     public Long contarUsuarios() {
         return usuarioService.contarUsuarios();
     }
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Usuario usuario) {
         Usuario encontrado = usuarioService.buscarPorNombreUsuario(usuario.getNombreUsuario());
 
         if (encontrado != null && encontrado.getContrasena().equals(usuario.getContrasena())) {
-            // Construir respuesta personalizada
             Map<String, Object> response = new HashMap<>();
             response.put("id", encontrado.getId());
             response.put("nombreUsuario", encontrado.getNombreUsuario());
             response.put("rol", encontrado.getRol());
             response.put("correo", encontrado.getCorreo());
 
-            // Si el usuario es profesor, incluir el id del profesor asociado
-            if ("PROFESOR".equalsIgnoreCase(encontrado.getRol()) && encontrado.getProfesor() != null) {
-                response.put("profesorId", encontrado.getProfesor().getId());
-            }
+            // Siempre incluir ambos campos aunque sean null
+            response.put("profesorId",
+                    (encontrado.getProfesor() != null) ? encontrado.getProfesor().getId() : null);
+
+            response.put("estudianteId",
+                    (encontrado.getEstudiante() != null) ? encontrado.getEstudiante().getId() : null);
 
             return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.status(401).body("Credenciales inválidas");
         }
     }
-
-
-
 }
+

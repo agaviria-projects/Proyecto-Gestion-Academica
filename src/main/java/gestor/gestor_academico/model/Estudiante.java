@@ -38,6 +38,10 @@ public class Estudiante {
     @JsonIgnore
     private List<Matricula> matriculas;
 
+    @ManyToOne
+    @JoinColumn(name = "estudiante_id")
+    private Estudiante estudiante;
+
 
     //Constructor vacio
     public Estudiante(){
@@ -78,6 +82,10 @@ public class Estudiante {
         return matriculas;
     }
 
+    public Estudiante getEstudiante() {
+        return estudiante;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -108,6 +116,10 @@ public class Estudiante {
 
     public void setMatriculas(List<Matricula> matriculas) {
         this.matriculas = matriculas;
+    }
+
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
     }
 
 }

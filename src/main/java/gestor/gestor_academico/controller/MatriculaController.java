@@ -91,6 +91,12 @@ public class MatriculaController {
                 .distinct() // evita cursos duplicados si está matriculado varias veces al mismo
                 .collect(Collectors.toList());
     }
+    @GetMapping("/profesor/{idProfesor}")
+    public List<MatriculaDTO> obtenerMatriculasPorProfesor(@PathVariable Long idProfesor) {
+        return matriculaService.obtenerMatriculasPorProfesor(idProfesor);
+    }
+
+
 
 }
 

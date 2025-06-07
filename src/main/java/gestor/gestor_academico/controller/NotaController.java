@@ -7,7 +7,12 @@ import gestor.gestor_academico.repository.NotaRepository;
 import gestor.gestor_academico.service.NotaService;
 import gestor.gestor_academico.service.CursoService;
 import gestor.gestor_academico.service.EstudianteService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -127,6 +132,21 @@ public class  NotaController {
             return dto;
         }).collect(Collectors.toList());
     }
+
+    @GetMapping("/exportar-notas")
+    public ResponseEntity<byte[]> exportarNotas(HttpServletRequest request) {
+        String rol = request.getHeader("rol");
+        String correo = request.getHeader("correo");
+
+        byte[] archivo = notaService.exportarNotasSegunRol(rol, correo);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentDispositionFormData("attachment", "notas.xlsx");
+
+        return new ResponseEntity<>(archivo, headers, HttpStatus.OK);
+    }
+
 
 }
 
