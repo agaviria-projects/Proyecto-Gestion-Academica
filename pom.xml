@@ -14,7 +14,7 @@
 	<groupId>gestor</groupId>
 	<artifactId>education-system-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>gestor-academico</name>
+	<name>education-system-backend</name>
 	<description>Proyecto backend para EducationSystem</description>
 
 	<properties>
