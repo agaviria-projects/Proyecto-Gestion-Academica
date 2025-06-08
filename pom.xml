@@ -82,11 +82,14 @@
 				</configuration>
 			</plugin>
 
-			<!-- Plugin de empaquetado Spring Boot -->
+			<!-- Plugin de empaquetado Spring Boot con mainClass -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>3.1.4</version>
+				<configuration>
+					<mainClass>gestor.gestor_academico.GestorAcademicoApplication</mainClass>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
@@ -97,4 +100,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>
