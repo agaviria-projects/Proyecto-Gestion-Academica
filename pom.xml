@@ -11,7 +11,7 @@
 	</parent>
 
 	<groupId>gestor</groupId>
-	<artifactId>gestor-academico</artifactId>
+	<artifactId>education-system-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>gestor-academico</name>
 	<description>Demo project for Spring Boot</description>
